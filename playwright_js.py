@@ -9,12 +9,15 @@ with sync_playwright() as playwright:
               wait_until= 'networkidle'
               )  ## команда для полной загрузки страницы
 
-    text = 'New Text'
+    new_text = 'New Text'
     page.evaluate(
-        f"""
-        const title = document.getElementById('authentication-ui-course-title-text')
-        title.textContent = '{text}'
         """
+        (text)=> {
+            const title = document.getElementById('authentication-ui-course-title-text')
+            title.textContent = text
+        }
+        """,
+        new_text
 
     )   ### команда для запуска js
     page.wait_for_timeout(5000)
