@@ -42,5 +42,7 @@ with sync_playwright() as playwright:
     expect(empty_view_description_text).to_be_visible()
     expect(empty_view_description_text).to_have_text("Results from the load test pipeline will be displayed here")
 
+    page.wait_for_timeout(5000)
+
 
 
