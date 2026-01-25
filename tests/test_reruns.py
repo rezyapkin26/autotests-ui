@@ -1,3 +1,5 @@
+# для перезапуска тестов устанавливаем плагин pip install pytest-rerunfailures
+
 import pytest
 import random
 
