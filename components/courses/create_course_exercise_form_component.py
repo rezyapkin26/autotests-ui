@@ -36,4 +36,4 @@ class CreateCourseExerciseFormComponent(BaseComponent):
         expect(title_input).to_have_text(title)
 
         description_input.fill(description)
-        expect(description_input).to_have_text(description)
+        expect(description_input).to_have_value(description)
