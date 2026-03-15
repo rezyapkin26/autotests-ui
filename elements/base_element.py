@@ -1,5 +1,6 @@
 from playwright.sync_api import Page, Locator, expect
 
+
 class BaseElement:
     def __init__(self, page: Page, locator: str, name: str):
         self.page = page
@@ -18,6 +19,6 @@ class BaseElement:
         locator = self.get_locator(**kwargs)
         expect(locator).to_be_visible()
 
-    def check_have_text(self, text:str, **kwargs):
+    def check_have_text(self, text: str, **kwargs):
         locator = self.get_locator(**kwargs)
         expect(locator).to_have_text(text)
