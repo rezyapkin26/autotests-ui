@@ -1,6 +1,6 @@
 from elements.base_element import BaseElement, Locator
 
-from playwright.async_api import expect
+from playwright.sync_api import expect
 
 
 class TextArea(BaseElement):
