@@ -2,11 +2,11 @@ import pytest
 from playwright.sync_api import Page
 
 from fixtures.browsers import chromium_page_with_state
-from pages.courses_list_page import CoursesListPage
-from pages.create_course_page import CreateCoursePage
-from pages.login_page import LoginPage
-from pages.dashboard_page import DashboardPage
-from pages.registration_page import RegistrationPage
+from pages.courses.courses_list_page import CoursesListPage
+from pages.courses.create_course_page import CreateCoursePage
+from pages.authentification.login_page import LoginPage
+from pages.dashboard.dashboard_page import DashboardPage
+from pages.authentification.registration_page import RegistrationPage
 
 @pytest.fixture
 def login_page(chromium_page: Page) -> LoginPage:
