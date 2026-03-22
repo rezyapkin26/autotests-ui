@@ -1,0 +1,9 @@
+from enum import Enum
+class AllureTags(str, Enum):  #Enum - это перечисление
+        COURSES = 'COURSES'
+        DASHBOARD = 'DASHBOARD'
+        REGRESSION = 'REGRESSION'
+        USER_LOGIN = 'USER_LOGIN'
+        NAVIGATION = 'NAVIGATION'
+        REGISTRATION = 'REGISTRATION'
+        AUTHORIZATION = 'AUTHORIZATION'

@@ -1,12 +1,24 @@
 import pytest
+import allure
 from pages.authentification.login_page import LoginPage
 from pages.authentification.registration_page import RegistrationPage
 from pages.dashboard.dashboard_page import DashboardPage
-
+from tools.allure.tags import AllureTags
+from tools.allure.epics import AllureEpic
+from tools.allure.features import AllureFeature
+from tools.allure.stories import AllureStories
+from allure_commons.types import Severity
 
 @pytest.mark.regression
 @pytest.mark.authorization
+@allure.tag(AllureTags.REGRESSION, AllureTags.AUTHORIZATION) # тэги принято писать капсом
+@allure.epic(AllureEpic.LMS)
+@allure.feature(AllureFeature.AUTHENTICATION)
+@allure.story(AllureStories.AUTHORIZATION)
 class TestAuthorization:
+    @allure.tag(AllureTags.USER_LOGIN)
+    @allure.title('User login with correct email and password')
+    @allure.severity(Severity.BLOCKER)
 
     def test_successful_authorization(self, registration_page: RegistrationPage,
                                       dashboard_page: DashboardPage,
@@ -39,6 +51,9 @@ class TestAuthorization:
                                  ('  ', 'password')
                              ]
                              )
+    @allure.tag(AllureTags.USER_LOGIN)
+    @allure.title('User login with wrong email or password') # allure заголовок для отчета
+    @allure.severity(Severity.CRITICAL)
     def test_wrong_email_or_password_authorization(self, login_page: LoginPage, email: str,
                                                    password: str):  # тест с PageObject
         login_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login')
@@ -48,6 +63,10 @@ class TestAuthorization:
         login_page.click_login_button()
         login_page.check_visible_wrong_email_or_password_alert()
 
+
+    @allure.tag(AllureTags.NAVIGATION)
+    @allure.title("Navigation from login page to registration page")
+    @allure.severity(Severity.NORMAL)
     def test_navigate_from_authorization_to_registration(self,
                                                          login_page: LoginPage,
                                                          registration_page: RegistrationPage):

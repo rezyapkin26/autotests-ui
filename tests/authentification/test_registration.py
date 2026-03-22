@@ -2,10 +2,21 @@
 import pytest
 from pages.authentification.registration_page import RegistrationPage
 from pages.dashboard.dashboard_page import DashboardPage
-
+import allure
+from tools.allure.tags import AllureTags
+from tools.allure.epics import AllureEpic
+from tools.allure.features import AllureFeature
+from tools.allure.stories import AllureStories
+from allure_commons.types import Severity
 @pytest.mark.regression
 @pytest.mark.registration
+@allure.tag(AllureTags.REGRESSION, AllureTags.REGISTRATION)
+@allure.epic(AllureEpic.LMS)
+@allure.feature(AllureFeature.AUTHENTICATION)
+@allure.story(AllureStories.REGISTRATION)
 class TestRegistration:
+        @allure.title('Registration with correct email, username, and password')
+        @allure.severity(Severity.CRITICAL)
         def test_successful_registration(self, dashboard_page: DashboardPage, registration_page: RegistrationPage):
                 registration_page.visit(
                         'https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
