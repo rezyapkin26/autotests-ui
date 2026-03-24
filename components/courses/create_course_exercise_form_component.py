@@ -3,6 +3,7 @@ from playwright.sync_api import expect, Page
 from elements.button import Button
 from elements.text import Text
 from elements.input import Input
+import allure
 
 class CreateCourseExerciseFormComponent(BaseComponent):
     def __init__(self, page: Page):
@@ -16,6 +17,7 @@ class CreateCourseExerciseFormComponent(BaseComponent):
         self.description_input = Input(page,
             'create-course-exercise-form-description-{index}-input', 'Description')
 
+
     def click_delete_button(self, index: int):
         self.delete_exercise_button.click(index=index)
         # реализация с патерном PageComponent
@@ -23,7 +25,7 @@ class CreateCourseExerciseFormComponent(BaseComponent):
         #     f'create-course-exercise-{index}-box-toolbar-delete-exercise-button')
         # delete_button.click()
 
-
+    @allure.step('Check visible create course exercise form at "{index}"')
     def check_visible(self, index: int, title: str, description: str):
         # реализация с патерном PageComponent
         # subtitle = self.page.get_by_test_id(
@@ -51,7 +53,7 @@ class CreateCourseExerciseFormComponent(BaseComponent):
         #
         # expect(description_input).to_be_visible()
         # expect(description_input).to_have_text(description)
-
+    @allure.step('Fill create course exercise form at "{index}"')
     def fill_exercise_form(self, index: int, title: str, description: str):
         # реализация с патерном PageComponent
         # title_input = self.page.get_by_test_id(
