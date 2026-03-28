@@ -14,7 +14,7 @@ class BaseElement:
 
     def get_locator(self, nth: int = 0, **kwargs) -> Locator:
         locator = self.locator.format(**kwargs)
-        with allure.step(f'Getting locator with "data-testid={locator}" at index {nth}'):
+        with allure.step(f'Getting locator with "data-test-id={locator}" at index {nth}'):
             return self.page.get_by_test_id(locator).nth(nth)
 
     def click(self, nth: int = 0, **kwargs):
