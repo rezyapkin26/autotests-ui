@@ -8,7 +8,7 @@ from tools.allure.epics import AllureEpic
 from tools.allure.features import AllureFeature
 from tools.allure.stories import AllureStories
 from allure_commons.types import Severity
-
+from tools.routes import AppRoute
 @pytest.mark.regression
 @pytest.mark.authorization
 @allure.tag(AllureTags.REGRESSION, AllureTags.AUTHORIZATION) # тэги принято писать капсом
@@ -26,7 +26,7 @@ class TestAuthorization:
     def test_successful_authorization(self, registration_page: RegistrationPage,
                                       dashboard_page: DashboardPage,
                                       login_page: LoginPage,):
-        registration_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration')
+        registration_page.visit(AppRoute.REGISTRATION)
         registration_page.registration_form.fill(email='rezyapkin.petr1211@yandex.ru',
                                                  username='username',
                                                  password='password')
@@ -59,7 +59,7 @@ class TestAuthorization:
     @allure.severity(Severity.CRITICAL)
     def test_wrong_email_or_password_authorization(self, login_page: LoginPage, email: str,
                                                    password: str):  # тест с PageObject
-        login_page.visit('https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/login')
+        login_page.visit(AppRoute.LOGIN)
         # реализация без компонента LoginFormComponent
         # login_page.fill_login_form(email=email, password=password)
         login_page.login_form.fill(email=email, password=password)

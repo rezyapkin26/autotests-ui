@@ -7,6 +7,7 @@ from tools.allure.epics import AllureEpic
 from tools.allure.features import AllureFeature
 from tools.allure.stories import AllureStories
 from allure_commons.types import Severity
+from tools.routes import AppRoute
 
 @pytest.mark.courses
 @pytest.mark.regression
@@ -21,7 +22,7 @@ class TestCourses:
     @allure.title('Check displaying of empty courses list') # Проверьте отображение пустого списка курсов
     @allure.severity(Severity.NORMAL)
     def test_empty_courses_list(self, courses_list_page: CoursesListPage):
-        courses_list_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses")
+        courses_list_page.visit(AppRoute.COURSES)
 
         courses_list_page.navbar.check_visible('username')
         courses_list_page.sidebar.check_visible()
@@ -33,7 +34,7 @@ class TestCourses:
     @allure.title('Create course')# Создать курс
     @allure.severity(Severity.CRITICAL)
     def test_create_course(self, courses_list_page: CoursesListPage, create_course_page: CreateCoursePage):
-        create_course_page.visit("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create")
+        create_course_page.visit(AppRoute.COURSES_CREATE)
 
         create_course_page.create_course_toolbar_view.check_visible()
 
@@ -67,7 +68,7 @@ class TestCourses:
         )
 
     def test_edit_course(self, create_course_page: CreateCoursePage, courses_list_page: CoursesListPage):
-        create_course_page.visit(' https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses/create')
+        create_course_page.visit(AppRoute.COURSES_CREATE)
         create_course_page.image_upload_widget.upload_preview_image(
             "./testdata/files/image.png")
         create_course_page.image_upload_widget.check_visible(is_image_uploaded=True)
