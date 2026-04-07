@@ -2,6 +2,9 @@ from elements.base_element import BaseElement
 
 from playwright.sync_api import  expect
 import allure
+from tools.logger import get_logger
+
+logger = get_logger("BUTTON")
 
 class Button(BaseElement):
     @property
@@ -10,11 +13,15 @@ class Button(BaseElement):
 
 
     def check_enabled(self, nth: int = 0, **kwargs):
-        with allure.step(f'Checking {self.type_of} "{self.name}" is enabled'):
+        step = f'Checking {self.type_of} "{self.name}" is enabled'
+        with allure.step(step):
             locator = self.get_locator(nth, **kwargs)
+            logger.info(step)
             expect(locator).to.be_enabled()
 
     def check_disabled(self, nth: int = 0, **kwargs):
-        with allure.step(f'Checking {self.type_of} "{self.name}" is disabled'):
+        step = f'Checking {self.type_of} "{self.name}" is disabled'
+        with allure.step(step):
             locator = self.get_locator(nth, **kwargs)
+            logger.info(step)
             expect(locator).to.be_disabled()
